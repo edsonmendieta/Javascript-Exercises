@@ -108,4 +108,69 @@ function strRoller(arg) {
   
 }
 
-strRoller("Whoopeeeeeeee!");
+strRoller("Rollercoaster!");
+
+
+// Bonus (Roller Coaster Text):  Try creating an undulating sine wave or shifting colours.
+
+
+// My Bonus Solution: Outputs given string in a sine wave curve, and assigns each letter a random color from an array of colors.
+
+var text = 'Hello World!';
+
+var div = document.getElementById('rollercoaster');
+
+
+var font = 10;
+
+var color = ["blue", "red", "yellow", "green", "orange", "skyblue", "silver", "purple", "gold"]; 
+
+function strRoller(arg) {
+
+  var splitStr = arg.split("");
+  
+  for (var i = 0; i < splitStr.length; i++) {
+
+      
+      if(i <= ((splitStr.length / 4) + .5)) {            // ADD 10 to font if this condition is true
+      
+      	font += 20;
+      }
+      
+      else if(i > ((splitStr.length / 4) + .5) && i <= ((splitStr.length / 2) + .5)) {
+      
+      	font -= 20;                                    // MINUS 10 from font if this condition is true          
+      }
+    
+    
+
+      else if(i > ((splitStr.length / 2) + .5) && i <= (((splitStr.length / 2) + .5) + ((splitStr.length / 4) + .5))) {
+        
+        	font += 20;                          // ADD 10 to font if this condition is true
+        }
+      
+      	else if( i > (((splitStr.length / 2) + .5) + ((splitStr.length / 4) + .5))) {
+        
+        	font -= 20;                          // MINUS 10 from font if this condition is true
+        }
+    
+    
+
+    var span = document.createElement('span');
+
+    var firstLtrNode = document.createTextNode(splitStr[i]);
+
+    var spanLtr = span.appendChild(firstLtrNode);
+
+    var spanLtrFont = span.style.fontSize = font + "px";
+    
+    var spanLtrColor = span.style.color = color[Math.floor(Math.random() * 10)];
+
+    div.appendChild(span);
+    
+    
+  }
+  
+}
+
+strRoller("Rollercoaster!");
