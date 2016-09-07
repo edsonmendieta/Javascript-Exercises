@@ -174,3 +174,54 @@ function strRoller(arg) {
 }
 
 strRoller("Rollercoaster!");
+
+
+
+
+// Source: https://dom-tutorials.appspot.com/static/3.html
+
+
+// Instructions: For this exercise we want to implement a custom context menu for Tux, the penguin.
+
+//Write some JavaScript code below that does as many of the following as you can:
+//Add a click event handler to the penguin (his id is "tux") that makes the menu visible (style.display = 'block').
+//Move the menu (e.g. style.left = '123px' and style.top = '123px') to the mouse's location. Use the event's pageX and pageY properties.
+//Instead of using click, use contextmenu to detect the right mouse button.
+//Supress the browser's own context menu.
+//Add a click handler to the whole page (document.body) that hides the menu (style.display = 'none').
+//Add event handlers to each option that does something.
+
+
+
+// My Solution
+
+document.getElementById('tux').addEventListener('contextmenu', seeMenu, false); 
+// opens context menu when user right-clicks on img of tux
+
+document.body.addEventListener('click', hideMenu, false); // hides context menu when user left-clicks
+
+
+
+
+var theMenu = document.getElementById('menu'); 
+
+
+function seeMenu(e) {
+  	
+  	var mouseX = e.pageX; 
+    var mouseY = e.pageY;
+	
+  	e.preventDefault(); // prevents the default browser context menu when user right-clicks
+	theMenu.style.display = 'block';
+  	theMenu.style.left = mouseX + "px";
+  	theMenu.style.top = mouseY + "px";
+  	console.log(e);
+}
+
+
+function hideMenu() {
+
+	theMenu.style.display = "none";
+}
+
+
