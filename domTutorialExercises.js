@@ -224,4 +224,32 @@ function hideMenu() {
 	theMenu.style.display = "none";
 }
 
+// - - - - - - - - - - - - - - - - - - - Option event handlers - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// Photograph - option
+
+document.getElementById('option1').addEventListener('click', download, false);
+
+
+function download() {
+  
+  	var tuxImg = document.getElementById('tux');
+
+	var newAnchor = document.createElement('a');
+  
+  
+  	newAnchor.setAttribute('id', 'tuxAnchor');
+  
+  	document.getElementById('playground6').appendChild(newAnchor);
+  
+  	var anchorBox = document.getElementById('tuxAnchor');
+  
+  	anchorBox.setAttribute('href', 'tux.png');
+  	anchorBox.setAttribute('download', '');
+  	
+  	anchorBox.appendChild(tuxImg);
+  	
+  	alert('Click on Tux the penguin to download the image!');
+  	
+}
 
