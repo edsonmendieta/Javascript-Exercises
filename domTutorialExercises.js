@@ -1,3 +1,7 @@
+// *********************
+//  Tree Walker (DOM iteration)
+// *********************
+
 // **Source**: https://dom-tutorials.appspot.com/static/1.html
 
 
@@ -40,7 +44,9 @@ nextNode = function(node) {
   return node;
 };
 
-
+// *********************
+//  Wavy Text
+// *********************
 
 
 // **Source**: https://dom-tutorials.appspot.com/static/2.html
@@ -176,7 +182,9 @@ function strRoller(arg) {
 strRoller("Rollercoaster!");
 
 
-
+// *********************
+//  Tux Context Menu
+// *********************
 
 // Source: https://dom-tutorials.appspot.com/static/3.html
 
@@ -193,7 +201,7 @@ strRoller("Rollercoaster!");
 
 
 
-// My Solution
+// My Solution to Tux Context Menu Exercise
 
 document.getElementById('tux').addEventListener('contextmenu', seeMenu, false); 
 // opens context menu when user right-clicks on img of tux
