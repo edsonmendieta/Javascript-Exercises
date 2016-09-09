@@ -294,3 +294,27 @@ function tickleTux() {
       	console.log(e);
     }
 }
+
+// Feed a Fish - option 
+
+var fishOption = document.getElementById('option3').addEventListener('click', alignTux, false);
+
+
+
+
+function alignTux() {
+
+	document.getElementById('tux').addEventListener('click', upTux, false);
+  
+  	function upTux() { // sits Tux upgright
+      
+      document.getElementById('tux').style.transform = "rotate(0deg)"; 
+      // this new transform style value is added to the tux-img & thus overrides the previous one
+      // from the "Rub-Belly" option (2nd option). 
+	 // The option the user selects (2nd or 3rd) dictates which transform value gets added last
+     // (+10deg or 0deg), since the respective value will be added last in the elements style 
+      // declartion block.
+    }
+  	
+  	
+}
