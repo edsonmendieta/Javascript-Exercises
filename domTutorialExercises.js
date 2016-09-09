@@ -261,3 +261,36 @@ function download() {
   	
 }
 
+// Rub belly - option 
+
+document.getElementById('option2').addEventListener('click', tickleTux, false);
+
+
+function tickleTux() {
+
+	var tuxImg = document.getElementById('tux');
+  
+  	var rotationTotal = 0;
+  
+  	tuxImg.style.transition = "transform .5s";
+  	
+  	tuxImg.addEventListener('click', itTickles, false);
+  
+  	alert("Click on Tux's belly and see how he reacts!");
+  
+  	function itTickles(e) {
+      
+      
+      	var addRotation = 10;
+      
+      	rotationTotal += addRotation;
+      
+        var rotationValue = 'rotate' + '(' + rotationTotal + 'deg' + ')' 
+    
+    	tuxImg.style.transform = rotationValue;
+      
+      	
+     
+      	console.log(e);
+    }
+}
