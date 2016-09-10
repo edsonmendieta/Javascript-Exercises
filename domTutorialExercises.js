@@ -204,11 +204,23 @@ strRoller("Rollercoaster!");
 // My Solution to Tux Context Menu Exercise
 
 
+// assigns an id to tux parent's container - tux's parent, parent.
+document.getElementById('tux').parentNode.parentNode.setAttribute('id', 'tuxTRContainer');
+
+// makes context-menu visible after photography option is chosen: menu was place behind img at that point
+document.getElementById('menu').style.zIndex = "5";
+
+var tR = document.getElementById('tuxTRContainer');
+  
+
+
 var fishyImg = document.createElement('img'); // creates img element for fish pic
   	
   	// sets fish img src
   	fishyImg.src = "https://i453.photobucket.com/albums/qq256/Groningen-photos/Illustrator/vector-goldfish.jpg";
   	
+	fishyImg.setAttribute('id', 'fishFood');
+	
 	fishyImg.style.position = "relative";
 	
   	fishyImg.style.width = "45px";
@@ -254,7 +266,23 @@ function hideMenu() {
 
 // Photograph - option
 
+document.getElementById('option1').addEventListener('click', alignTux, false);
+
 document.getElementById('option1').addEventListener('click', download, false);
+
+
+function alignTux() {
+  
+  	
+  
+  	// Puts Tux right-side-up when 3rd option is selected
+  	document.getElementById('tux').style.transform = "rotate(0deg)"; 
+
+	
+  	
+  	
+}
+
 
 
 function download() {
@@ -283,10 +311,30 @@ function download() {
 
 // Rub belly - option 
 
+document.getElementById('option2').addEventListener('click', alignTux, false);
+
 document.getElementById('option2').addEventListener('click', tickleTux, false);
+
+function alignTux() {
+  
+  	
+  
+  	// Puts Tux right-side-up when 3rd option is selected
+  	document.getElementById('tux').style.transform = "rotate(0deg)"; 
+
+	
+  	
+  	
+}
 
 
 function tickleTux() {
+  
+  	if(document.getElementById('tuxAnchor')) {
+    
+    	document.getElementById('tuxAnchor').removeAttribute('href'); // removes download functionality from 
+	// tux img.
+    }
 
 	var tuxImg = document.getElementById('tux');
   
@@ -327,6 +375,8 @@ fishOption.addEventListener('click', createFishPic, false);    // attaches event
 
 function alignTux() {
   
+  	
+  
   	// Puts Tux right-side-up when 3rd option is selected
   	document.getElementById('tux').style.transform = "rotate(0deg)"; 
 
@@ -346,11 +396,13 @@ function alignTux() {
 }
 
 function createFishPic() {
-
-	
   
-  	// assigns an id to tux parent's container - tux's parent, parent.
- 	document.getElementById('tux').parentNode.parentNode.setAttribute('id', 'tuxTRContainer');
+  	//var lastElement = tR.lastChild;
+
+	//if(fishyImg.style.opacity === 0) {
+    
+    //	fishyImg.style.opacity = "1";
+    //}
   
   	document.getElementById('tuxTRContainer').appendChild(fishyImg);
   
@@ -360,6 +412,7 @@ function createFishPic() {
   	alert('Click on the fish to feed it to Tux!');
   
   	function feedTux() {
+      
       
       	fishyImg.style.transition = "top 1s, opacity 2s"; // time-length of transforms
       
@@ -379,10 +432,30 @@ function createFishPic() {
       	function yum() {
         
         	alert('Tux says: "YUMMM! Thanks!"');
+          
         }
+      
+      	window.setTimeout(eraseFishy, 4000)
+        
+        function eraseFishy() { 
+        	
+          	fishyImg.style.opacity = "1"; // These two styles set fish img visible and at correct position
+          	fishyImg.style.top = "175px";
+            
+          	if(tR.lastChild == fishyImg) { // deletes fish img to reset for another 3rd option 'click'
+            	
+              document.getElementById('tuxTRContainer').removeChild(fishyImg);
+            }
+        }
+      
+      	
+      
+      
+      	// resetting the fish for another click - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      
+      	
     } 
-  	
-  	
 }
+
 
 
