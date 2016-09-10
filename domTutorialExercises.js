@@ -203,6 +203,23 @@ strRoller("Rollercoaster!");
 
 // My Solution to Tux Context Menu Exercise
 
+
+var fishyImg = document.createElement('img'); // creates img element for fish pic
+  	
+  	// sets fish img src
+  	fishyImg.src = "https://i453.photobucket.com/albums/qq256/Groningen-photos/Illustrator/vector-goldfish.jpg";
+  	
+	fishyImg.style.position = "relative";
+	
+  	fishyImg.style.width = "45px";
+  	fishyImg.style.height = "45px";
+	
+	fishyImg.style.right = "635.5px";
+	fishyImg.style.top = "175px";
+
+
+
+
 document.getElementById('tux').addEventListener('contextmenu', seeMenu, false); 
 // opens context menu when user right-clicks on img of tux
 
@@ -223,6 +240,7 @@ function seeMenu(e) {
 	theMenu.style.display = 'block';
   	theMenu.style.left = mouseX + "px";
   	theMenu.style.top = mouseY + "px";
+  
   	console.log(e);
 }
 
@@ -261,6 +279,8 @@ function download() {
   	
 }
 
+
+
 // Rub belly - option 
 
 document.getElementById('option2').addEventListener('click', tickleTux, false);
@@ -295,18 +315,24 @@ function tickleTux() {
     }
 }
 
+
 // Feed a Fish - option 
 
-var fishOption = document.getElementById('option3').addEventListener('click', alignTux, false);
+var fishOption = document.getElementById('option3');
 
+fishOption.addEventListener('click', alignTux, false); // attaches event listener to option3
 
+fishOption.addEventListener('click', createFishPic, false);    // attaches event listener to option3
 
 
 function alignTux() {
+  
+  	// Puts Tux right-side-up when 3rd option is selected
+  	document.getElementById('tux').style.transform = "rotate(0deg)"; 
 
 	document.getElementById('tux').addEventListener('click', upTux, false);
   
-  	function upTux() { // sits Tux upgright
+  	function upTux() { // sits Tux upgright every time user clicks on him.
       
       document.getElementById('tux').style.transform = "rotate(0deg)"; 
       // this new transform style value is added to the tux-img & thus overrides the previous one
@@ -318,3 +344,17 @@ function alignTux() {
   	
   	
 }
+
+function createFishPic() {
+
+	
+  
+  	// assigns an id to tux parent's container - tux's parent, parent.
+ 	document.getElementById('tux').parentNode.parentNode.setAttribute('id', 'tuxTRContainer');
+  
+  	document.getElementById('tuxTRContainer').appendChild(fishyImg);
+  	
+  	
+}
+
+
