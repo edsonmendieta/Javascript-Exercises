@@ -353,6 +353,34 @@ function createFishPic() {
  	document.getElementById('tux').parentNode.parentNode.setAttribute('id', 'tuxTRContainer');
   
   	document.getElementById('tuxTRContainer').appendChild(fishyImg);
+  
+  	
+  	fishyImg.addEventListener('click',  feedTux, false);
+  
+  	alert('Click on the fish to feed it to Tux!');
+  
+  	function feedTux() {
+      
+      	fishyImg.style.transition = "top 1s, opacity 2s"; // time-length of transforms
+      
+    
+    	fishyImg.style.top = "90px"; // moves fish up to Tux's mouth
+      
+      	fishyImg.style.opacity = "0";   // fades-out fish once it reaches Tux's mouth
+      
+      	document.getElementById('tux').style.transition = "transform .5s"; // assigns time to transition
+      
+      	document.getElementById('tux').style.transitionDelay = "1s"; // delays transition for 1s...
+      	// giving fishImg transitions to finish first
+      	document.getElementById('tux').style.transform = "rotate(1080deg)"; // spins tux 
+      
+      	window.setTimeout(yum, 2500); // delays the 'yum' function for 2500ms
+      
+      	function yum() {
+        
+        	alert('Tux says: "YUMMM! Thanks!"');
+        }
+    } 
   	
   	
 }
