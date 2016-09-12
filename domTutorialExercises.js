@@ -486,21 +486,67 @@ table.addEventListener('click', lightSwitch, false);
 
 function lightSwitch(e) { //switches a star ON / OFF depending on it's src attribute value
   
-  	var on = "https://dom-tutorials.appspot.com/static/star_on.gif"; // full console.log output of e.target.src
   	var off = "https://dom-tutorials.appspot.com/static/star_off.gif";
   
-  	if(e.target.src) {
+  
+  	var starId = e.target.id;
+  
+  	var myRe = /\d/;
+  
+  	var myReDouble = /\d\d/;
+  
+  	var starNumber = myRe.exec(starId);
+  
+  	var starNumberDouble = myReDouble.exec(starId);
+  
+  	var finalStarNumber;
+  
+  
+  	var lightState;
+  
+  
+  	if(e.target.src) { // checks if target element has src property
     	
-      	if(e.target.src == off) {
+      	if(e.target.src == off) { // if off...
         
-        	e.target.src = "star_on.gif";
+        	e.target.src = "star_on.gif"; //...turn on
+          	
+          	lightState = 1;
 
         }
       
       	else {
         
-        	e.target.src = "star_off.gif";
+        	e.target.src = "star_off.gif"; // else, turn off
+          
+          	lightState = 0;
         }
+      
+      
+      	if (starId.length < 7) {
+        
+        	finalStarNumber = starNumber;
+        }
+      
+      	else {
+        
+        	finalStarNumber = starNumberDouble;
+        }
+          
+        var ns = new XMLHttpRequest();
+      	ns.open('GET', '/collab.py?n=' + finalStarNumber[0] + '&s=' + lightState);
+      	ns.onreadystatechange = function() {
+        
+        	if(this.readyState == 4 && this.status == 200) {
+            
+            	console.log(this.responseText);
+            }
+        }
+      	ns.send();
+      	
+      	
+      	console.log(finalStarNumber[0]);
+      	console.log(lightState);
     }
 }
 
