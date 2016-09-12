@@ -459,3 +459,50 @@ function createFishPic() {
 
 
 
+// *********************
+//  Collaborative Stars (an 'asynchornous server requests' exercise)
+// *********************
+
+// Source: https://dom-tutorials.appspot.com/static/4.html
+
+
+// Instructions: The goal of this exercise is to write a collaborative drawing application where users can turn stars on and off
+// and all other viewers of this page see the same pattern.
+
+// 1. Add an event handler to each star (or to the table) so that when a star is clicked it toggles between on and off.
+// 2. Send the clicked star's number (0-99) and new state (0 or 1) to the server in this format: /collab.py?n=99&s=1
+// 3. The resulting response is a 100 character string that should be used to turn on or off each of the 100 stars.
+
+
+
+
+
+// My Solution Collaborative Stars Exercise
+
+var table = document.getElementById('star_table');
+var stars = table.getElementsByTagName('img');
+
+table.addEventListener('click', lightSwitch, false);
+
+function lightSwitch(e) { //switches a star ON / OFF depending on it's src attribute value
+  
+  	var on = "https://dom-tutorials.appspot.com/static/star_on.gif"; // full console.log output of e.target.src
+  	var off = "https://dom-tutorials.appspot.com/static/star_off.gif";
+  
+  	if(e.target.src) {
+    	
+      	if(e.target.src == off) {
+        
+        	e.target.src = "star_on.gif";
+
+        }
+      
+      	else {
+        
+        	e.target.src = "star_off.gif";
+        }
+    }
+}
+
+
+
