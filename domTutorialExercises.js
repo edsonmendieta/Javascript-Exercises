@@ -482,6 +482,42 @@ function createFishPic() {
 var table = document.getElementById('star_table');
 var stars = table.getElementsByTagName('img');
 
+
+table.addEventListener('click', statusInterval, false);
+
+
+
+
+function statusInterval() {
+
+	var someInterval = window.setInterval(getStarStatus, 5000);
+  
+  
+  	function getStarStatus() {
+    
+    	var req = new XMLHttpRequest();
+      	req.open('GET', '/collab.py');
+      	req.onreadystatechange = function() {
+        
+        	if(this.readyState == 4 && this.status == 200) {
+            
+            	console.log(this.responseText);
+            }
+        }
+      req.send();
+    }
+  
+  window.clearInterval(someInterval);
+}
+
+
+
+
+
+
+
+
+
 table.addEventListener('click', lightSwitch, false);
 
 function lightSwitch(e) { //switches a star ON / OFF depending on it's src attribute value
@@ -533,8 +569,11 @@ function lightSwitch(e) { //switches a star ON / OFF depending on it's src attri
         	finalStarNumber = starNumberDouble;
         }
           
-        var ns = new XMLHttpRequest();
-      	ns.open('GET', '/collab.py?n=' + finalStarNumber[0] + '&s=' + lightState);
+      	
+      
+      	var ns = new XMLHttpRequest();
+      	ns.open('POST', '/collab.py');
+      	ns.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       	ns.onreadystatechange = function() {
         
         	if(this.readyState == 4 && this.status == 200) {
@@ -542,13 +581,15 @@ function lightSwitch(e) { //switches a star ON / OFF depending on it's src attri
             	console.log(this.responseText);
             }
         }
-      	ns.send();
-      	
-      	
-      	console.log(finalStarNumber[0]);
-      	console.log(lightState);
+      	ns.send('n=' + finalStarNumber[0] + '&s=' + lightState);
+      
+      
+      
+      	//console.log(finalStarNumber[0]);
+      	//console.log(lightState);
     }
 }
+
 
 
 
