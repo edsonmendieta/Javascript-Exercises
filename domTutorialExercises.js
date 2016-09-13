@@ -482,6 +482,9 @@ function createFishPic() {
 var table = document.getElementById('star_table');
 var stars = table.getElementsByTagName('img');
 
+var table = document.getElementById('star_table');
+var stars = table.getElementsByTagName('img');
+
 
 table.addEventListener('click', statusInterval, false);
 
@@ -507,7 +510,6 @@ function statusInterval() {
       req.send();
     }
   
-  window.clearInterval(someInterval);
 }
 
 
@@ -529,7 +531,7 @@ function lightSwitch(e) { //switches a star ON / OFF depending on it's src attri
   
   	var myRe = /\d/;
   
-  	var myReDouble = /\d\d/;
+  	var myReDouble = /\d\d/; // the 'g' modifier didn't appear to be working
   
   	var starNumber = myRe.exec(starId);
   
@@ -589,7 +591,6 @@ function lightSwitch(e) { //switches a star ON / OFF depending on it's src attri
       	//console.log(lightState);
     }
 }
-
 
 
 
