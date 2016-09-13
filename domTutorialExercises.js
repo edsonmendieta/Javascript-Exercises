@@ -482,8 +482,6 @@ function createFishPic() {
 var table = document.getElementById('star_table');
 var stars = table.getElementsByTagName('img');
 
-var table = document.getElementById('star_table');
-var stars = table.getElementsByTagName('img');
 
 
 table.addEventListener('click', statusInterval, false);
