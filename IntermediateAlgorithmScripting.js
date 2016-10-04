@@ -101,7 +101,7 @@ function convertToRoman(num) {
   // options on how to convert depending on # length
   switch(splitNumbers.length) {
       
-    case 4: // if number length is 4 do this:
+    case 4: // if number length is 4 digits do this:
       for (i = 0; i < 4; i++) { // a for-loop used to iterate over each element/number in splitNumbers array
         
         switch(i) { // what is i at this point
@@ -232,7 +232,7 @@ function convertToRoman(num) {
       }
       break;
       
-    case 3:
+    case 3: // if number is 3 digits do this: (same but for 3 digits w/0 a thousandths place).
       for (i = 0; i < 3; i++) { // a for-loop used to iterate over each element/number in splitNumbers array
         
         switch(i) { // what is i at this point
@@ -355,7 +355,7 @@ function convertToRoman(num) {
       }
       break;
       
-    case 2:
+    case 2: // if number is 2 digits do this: (same but for 2 digits w/0 a thousandths or hundredths place).
       for (i = 0; i < 4; i++) { // a for-loop used to iterate over each element/number in splitNumbers array
         
         switch(i) { // what is i at this point
@@ -439,7 +439,7 @@ function convertToRoman(num) {
       }
       break;
       
-    case 1:
+    case 1: // if number is 1 digit do this: (same but only for number with a one's place).
       for (i = 0; i < 4; i++) { // a for-loop used to iterate over each element/number in splitNumbers array
         
         switch(i) { // what is i at this point
