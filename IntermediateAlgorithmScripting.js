@@ -718,3 +718,41 @@ function pairElement(str) {
 
 pairElement("GCG");
 //----------------------------------------------------------------------------------------------------------------
+
+
+
+//Find the missing letter in the passed letter range and return it.
+//If all letters are present in the range, return undefined.
+
+
+function fearNotLetter(str) {
+  
+
+  
+  if ((str.charCodeAt(0)) + (str.length - 1) !== str.charCodeAt(str.length - 1)) { // if #-code of first letter. + number of letters left does not equal #-code of last letter, then there IS A MISSING LETTER.
+      
+        
+        for (i = 0; i < str.length; i++) { // iterates through each letter of "str" arg.
+          
+          var prevLetter = i - 1; // the index # of the letter previous to current letter/index number.
+          
+          if (i !== 0) { // if index # of current letter is not 0, then:
+            
+              if (str.charCodeAt(i) - str.charCodeAt(prevLetter) !== 1) { // if code # of current letter - code # of previous letter do not equal 1, a.k.a the missing letter is between them, do this:
+                
+                return String.fromCharCode(str.charCodeAt(i) - 1); // gets letter by using its # code, which is the current letter's # code - 1. 
+              }
+          }
+        }
+      }
+  
+  else { // if letters are NOT MISSING do this:
+    
+    return undefined;
+  }
+  
+  
+}
+
+fearNotLetter("abcdefghjklmno");
+//-----------------------------------------------------------------------------------------------------------------------
