@@ -598,3 +598,77 @@ function myReplace(str, before, after) {
 
 myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
 //-----------------------------------------------------------------------------------------------------------------
+
+
+
+// Translates the provided string to pig latin.
+
+function translatePigLatin(str) {
+  
+  var ay = "ay";
+  
+  var way = "way";
+  
+  var vowels = ["a", "e", "i", "o", "u"];
+  
+  var splitStr = str.split(""); 
+  
+  var vowelFirst = "no"; // is updated to "yes" if first letter of word is a vowel
+  
+  var newStr; // the edited word.
+  
+  var vowelFound = "no"; // if word DOESN't start with vowel: is updated to "yes" once first vowel in word is found.
+  
+  var consonantArray = []; // if word DOESN'T start with vowel: contains first consonant's', up until first vowel in word.
+  
+  var restOfLetters = []; // if word DOESN'T start with vowel: contains all letters after & including first vowel in word.
+  
+  
+  
+  for (i = 0; i < 5; i++) { // checks if word starts with a vowel
+    
+       if (splitStr[0] == vowels[i]) {
+           
+           vowelFirst = "yes";
+       }
+  }
+    
+      
+       
+       if (vowelFirst == "yes") {  // if word DOES start with a vowel
+     
+         
+           newStr = str + way; // edits word according to pig-latin rules
+         
+       }
+    
+       else if (vowelFirst == "no") { // if word does NOT start with a vowel
+      
+         
+           for (z = 0; z < splitStr.length; z++) {
+             
+               var letter = splitStr[z]; // evaluates each letter in word to see if it's a vowel.
+             
+               if(letter !== "a" && letter !== "e" && letter !== "i" && letter !== "o" && letter !== "u" && vowelFound == "no") {
+                 // if current letter is NOT a vowel and a vowel has NOT been encountered yet, do this:
+                   consonantArray.push(letter);
+               }
+             
+               else { // if current letter IS a vowel AND/OR a vowel has already been encountered, do this: 
+                 
+                 restOfLetters.push(letter);
+                 
+                 vowelFound = "yes";
+               }
+
+           }
+           
+           newStr = restOfLetters.join("") + consonantArray.join("") + ay;// edits word according to pig-latin rules
+       }
+  
+  
+  return newStr;
+}
+
+translatePigLatin("glove");
+//---------------------------------------------------------------------------------------------------------------------
