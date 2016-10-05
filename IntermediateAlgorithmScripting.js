@@ -548,3 +548,53 @@ function whatIsInAName(collection, source) {
 
 whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 //------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//Performs a search and replace on the sentence using the arguments provided and returns the new sentence.
+//First argument is the sentence to perform the search and replace on.
+//Second argument is the word that you will be replacing (before).
+//Third argument is what you will be replacing the second argument with (after).
+//NOTE: Preserve the case of the original word when you are replacing it. For example if you mean to replace 
+//the word "Book" with the word "dog", it should be replaced as "Dog"
+
+function myReplace(str, before, after) {
+  
+  // new sentence
+  var newStr;
+  
+  // "before" variables
+  var beforeSplit = before.split(""); // array made up of letters of "before" arg.
+  
+  var beforeFirstUpper = beforeSplit[0].toUpperCase(); // first letter of "before", uppercased.
+  
+  // "after" variables
+  var afterSplit = after.split(""); // array made up of letters of "after" arg.
+  
+  var afterFirstUpper = afterSplit[0].toUpperCase(); // first letter of "after", uppercased.
+  
+  var newAfter; 
+  
+  
+  //conditional
+  if (beforeSplit[0] == beforeFirstUpper) { // if first letter of "before" IS uppercase...
+    
+      newAfter = after.replace(afterSplit[0], afterFirstUpper); //...make first letter of "after" uppercase.
+        
+      newStr = str.replace(before, newAfter); // replace matches of "before" in "str" with uppercased-first-letter version of "after".
+    
+  }
+  
+  else { // if first letter of "before" is NOT uppcase...
+    
+    newStr = str.replace(before, after); // replace matches of "before" in "str" with UN-AlTERED "after".
+  }
+  
+  
+  
+  return newStr; // return the edited sentence
+}
+
+myReplace("He is Sleeping on the couch", "Sleeping", "sitting");
+//-----------------------------------------------------------------------------------------------------------------
