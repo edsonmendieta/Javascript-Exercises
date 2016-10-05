@@ -672,3 +672,49 @@ function translatePigLatin(str) {
 
 translatePigLatin("glove");
 //---------------------------------------------------------------------------------------------------------------------
+
+
+
+// The DNA strand is missing the pairing element. Take each character, get its pair, and return the results as a 2d array.
+
+function pairElement(str) {
+  
+  
+  var outerArr = [];
+  
+  var splitStr = str.split("");
+  
+  
+  for (i = 0; i < splitStr.length; i++) { // iterates over every letter of "str" arg.
+     
+    var innerArr = [];
+    
+    switch(splitStr[i]) { // evaluates current letter and does one of the following:
+        
+        case "G":
+        innerArr.push("G", "C");
+        outerArr.push(innerArr);
+        break;
+        
+        case "C":
+        innerArr.push("C", "G");
+        outerArr.push(innerArr);
+        break;
+        
+        case "A":
+        innerArr.push("A", "T");
+        outerArr.push(innerArr);
+        break;
+        
+        case "T":
+        innerArr.push("T", "A");
+        outerArr.push(innerArr);
+    }
+  }
+  
+  
+  return outerArr; // returns a 2D array.
+}
+
+pairElement("GCG");
+//----------------------------------------------------------------------------------------------------------------
