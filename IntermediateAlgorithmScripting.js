@@ -70,6 +70,7 @@ function diffArray(arr1, arr2) {
 }
 
 diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+//---------------------------------------------------------------------------------------------------------
 
 
 
@@ -492,3 +493,58 @@ function convertToRoman(num) {
 }
 
 convertToRoman(3999);
+// --------------------------------------------------------------------------------------------------------
+
+
+
+
+//Make a function that looks through an array of objects (first argument) and returns an array of all objects 
+//that have matching property and value pairs (second argument). Each property and value pair of the source 
+//object has to be present in the object from the collection if it is to be included in the returned array.
+
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  // Only change code below this line
+  
+  
+  //collection variables
+  var collectionLength = collection.length;
+  
+  // source variables
+  var sourceKeys = Object.keys(source);
+  
+  var sourceKeysLength = sourceKeys.length;
+  
+  // outer for-loop
+  for (i = 0; i < collectionLength; i++) {
+    
+    var yesNo = 0; // keeps track of successful key-value matches in current "collection" object/element.
+    
+    // innner for-loop
+    for (z = 0; z < sourceKeysLength; z++) {
+    
+        if (collection[i].hasOwnProperty(sourceKeys[z])) {
+            
+              if(collection[i][sourceKeys[z]] == source[sourceKeys[z]]) {
+                
+                yesNo += 1; // object had a successful/identical key-value match/pair with current "source" key-value pair.
+              }
+        }
+    }
+    
+    if (yesNo == sourceKeysLength) { // if current "collection" object had identical key-value pairs with "source"...
+      
+      arr.push(collection[i]); //...push current "collection" object into "arr" array.
+    }
+  }
+  
+  
+  
+  
+  // Only change code above this line
+  return arr;
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+//------------------------------------------------------------------------------------------------------------------
