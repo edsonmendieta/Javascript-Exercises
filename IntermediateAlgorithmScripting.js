@@ -780,3 +780,84 @@ function booWho(bool) {
 
 booWho(null);
 //-----------------------------------------------------------------------------------------------------------------------
+
+
+
+//Write a function that takes two or more arrays and returns a new array of unique values in 
+//the order of the original provided arrays.
+
+//In other words, all values present from all arrays should be included in their original order,
+//but with no duplicates in the final array.
+
+//The unique numbers should be sorted by their original order, but the final array should not be sorted in numerical order.
+
+function uniteUnique(arr) {
+  
+  
+  var joinedArray = [];
+  
+  var newArray = [];
+  
+  var finalArray = [];
+  
+  
+  for (i = 0; i < arguments.length; i++) {
+    
+      var joined = arguments[i].join("");
+      joinedArray.push(joined);
+  }
+  
+  joinedArray = joinedArray.join("");
+  joinedArray = joinedArray.split("");
+  
+  
+  for (z = 0; z < joinedArray.length; z++) {
+    
+      if (z === 0) {
+        
+          newArray.push(joinedArray[z]);
+      }
+    
+      else {
+        
+          var match = "no";
+        
+          for (h = 0; h < newArray.length; h++) {
+            
+              if (joinedArray[z] == newArray[h]) {
+                
+                  match = "yes";
+              }
+          }
+        
+          if (match == "no") {
+            
+              newArray.push(joinedArray[z]);
+          }
+      }
+  }
+  
+   
+  for (q = 0; q < newArray.length; q++) {
+    
+      var numberized = Number(newArray[q]);
+    
+      finalArray.push(numberized);
+  }
+  
+
+  //var word;
+  
+  //if ([5] == 5) {
+    
+   // word = "bird";
+  //}
+  
+  
+  return finalArray;
+}
+
+
+
+uniteUnique([1, 3, 2], [1, [5]], [2, [4]]);
+//---------------------------------------------------------------------------------------------------------------------
