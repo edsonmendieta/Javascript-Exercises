@@ -794,70 +794,52 @@ booWho(null);
 function uniteUnique(arr) {
   
   
-  var joinedArray = [];
+  var oneBigArray = [];
   
   var newArray = [];
   
-  var finalArray = [];
   
-  
-  for (i = 0; i < arguments.length; i++) {
+  for (i = 0; i < arguments.length; i++) { // gets all elements of "arr" arrays and puts them into one arrray.
     
-      var joined = arguments[i].join("");
-      joinedArray.push(joined);
-  }
-  
-  joinedArray = joinedArray.join("");
-  joinedArray = joinedArray.split("");
-  
-  
-  for (z = 0; z < joinedArray.length; z++) {
-    
-      if (z === 0) {
+      for (z = 0; z < arguments[i].length; z++) { 
         
-          newArray.push(joinedArray[z]);
+          oneBigArray.push(arguments[i][z]);
+      }
+  }  
+  
+  
+  for (a = 0; a < oneBigArray.length; a++) { // iterates over each element of "oneBigArray".
+    
+      if (a === 0) { // if element is the first element, add to "newArray".
+        
+          newArray.push(oneBigArray[a]);
       }
     
-      else {
+      else { // element is NOT the first element, do this: 
         
-          var match = "no";
+          var match = "no"; // if current element of "oneBigArray" matches any element in "newArray" this turns to "yes".
         
-          for (h = 0; h < newArray.length; h++) {
+          for (b = 0; b < newArray.length; b++) { // iterates over "newArray" elements.
             
-              if (joinedArray[z] == newArray[h]) {
+              if (oneBigArray[a] == newArray[b]) {
                 
-                  match = "yes";
+                  match = "yes"; // there WAS a match, so current "oneBigArray" element is NOT pushed to "newArray".
               }
           }
         
-          if (match == "no") {
+          if (match == "no") { // there was NOT a match so current "oneBigArray" IS pushed to "newArray". 
             
-              newArray.push(joinedArray[z]);
+              newArray.push(oneBigArray[a]);
           }
       }
   }
   
-   
-  for (q = 0; q < newArray.length; q++) {
-    
-      var numberized = Number(newArray[q]);
-    
-      finalArray.push(numberized);
-  }
   
-
-  //var word;
-  
-  //if ([5] == 5) {
-    
-   // word = "bird";
-  //}
-  
-  
-  return finalArray;
+  return newArray; // returns the new array with unique values in their original order.
 }
 
 
 
 uniteUnique([1, 3, 2], [1, [5]], [2, [4]]);
+
 //---------------------------------------------------------------------------------------------------------------------
