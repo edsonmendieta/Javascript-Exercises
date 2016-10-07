@@ -843,3 +843,31 @@ function uniteUnique(arr) {
 uniteUnique([1, 3, 2], [1, [5]], [2, [4]]);
 
 //---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+//Convert the characters &, <, >, " (double quote), and ' (apostrophe), in a string to their corresponding HTML entities.
+
+function convertHTML(str) {
+  // &colon;&rpar;
+  
+  
+  var newStr = str.replace(/&/g, "&amp;");
+  
+  newStr = newStr.replace(/'/g, "&apos;");
+  
+  newStr = newStr.replace(/</g, "&lt;");
+  
+  newStr = newStr.replace(/>/g, "&gt;");
+  
+  newStr = newStr.replace(/"/g, "&quot;");
+  
+  
+  
+  
+  return newStr;
+}
+
+convertHTML("Dolce & Gabbana");
+//-----------------------------------------------------------------------------------------------------------------------
