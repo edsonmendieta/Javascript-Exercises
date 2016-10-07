@@ -968,7 +968,7 @@ sumFibs(1000);
 
 
 
-
+// Sums all the prime numbers up to and including the provided number.
 
 function sumPrimes(num) {
   
