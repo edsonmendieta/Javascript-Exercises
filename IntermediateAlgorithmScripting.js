@@ -871,3 +871,54 @@ function convertHTML(str) {
 
 convertHTML("Dolce & Gabbana");
 //-----------------------------------------------------------------------------------------------------------------------
+
+
+
+// Converts a string to spinal case. Spinal case is all-lowercase-words-joined-by-dashes.
+
+function spinalCase(str) {
+  // "It's such a fine line between stupid, and clever."
+  // --David St. Hubbins
+  
+  var array = str.split("");
+  
+  var originalLength = array.length;
+  
+  var modifiedStr;
+  
+  
+  for (i = array.length - 1; i >= 0; i--) {
+    
+      var currentIndex = i;
+  
+    
+      if (array[i] !== array[i].toLowerCase() && isNaN(array[i-1]) === true && array[i-1] !== "_" && i !== 0) {
+      // if current element in "array" is not lowercase, &, the element before it is not a number[numbers are replaced using regexp below, and a space counts as a number, so if there's a space before a capital letter this conditional evaluates to false and no extra space is added], &, the element before it is not an underscore: _ [underscores are dealt with below, so if I wasn't to include this boolean they would be acted upon and the end result of the function would produce "--" between each word instead of just "-"], & the current element is not the first one [a first element that is a capital letter doesn't need a space before it since there's no possibility that there's another letter before it & thus "attached" to it.] 
+        
+          array.splice(i, 0, " "); // if all conditionals are "true", then add a space before the capital letter.
+      }
+    
+  }
+  
+
+ 
+  
+modifiedStr = array.join(""); // edited "array" is joined into one single string again.
+  
+  
+  
+  
+   var lowercased = modifiedStr.toLowerCase(); // converts all letters in array to lowercase
+  
+   lowercased = lowercased.replace(/\W/g, "-"); // replaces all non-alphanumerics with a dash.
+  
+   lowercased = lowercased.replace(/\d/g, "-"); // replaces all digits with a dash.
+  
+   lowercased = lowercased.replace(/_/g, "-"); // replaces all underscores with a dash. 
+  
+  
+  
+   return lowercased; // returns original string converted to spinal case. 
+}
+
+spinalCase('thisIsSpinalTap');
