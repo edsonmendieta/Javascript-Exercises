@@ -922,3 +922,46 @@ modifiedStr = array.join(""); // edited "array" is joined into one single string
 }
 
 spinalCase('thisIsSpinalTap');
+//-------------------------------------------------------------------------------------------------------------------------
+
+
+
+// Given a positive integer num, returns the sum of all odd Fibonacci numbers that are less than or equal to num.
+
+function sumFibs(num) {
+
+//variables
+var arr = [0, 1];
+  
+var newArr = [];
+  
+  
+// loop that adds next fibonacci number to "arr" if it's <= "num".
+for (i = 2; arr[i - 1] + arr[i - 2] <= num; i++) { // stops once NEXT fibonacci number is greater than "num".
+
+    arr[i] = arr[i - 2] + arr[i - 1]; // sets value of current "arr" element to sum of the two elements/numbers before it.
+}
+  
+
+
+for (z = 0; z < arr.length; z++) { // iterates over "arr" elements.
+  
+    if ((arr[z] % 2) !== 0) { // if current "arr" element is an ODD number:
+      
+        newArr.push(arr[z]); //...push it to "newArr".
+    }
+}
+  
+  
+ var sum = newArr.reduce(function(a, b) { // adds up all elements of "newArr" and returns the total.
+   
+     return a + b;
+ }, 0);
+
+
+   return sum;
+}
+
+
+sumFibs(1000);
+//------------------------------------------------------------------------------------------------------------------------
