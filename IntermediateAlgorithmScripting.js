@@ -965,3 +965,73 @@ for (z = 0; z < arr.length; z++) { // iterates over "arr" elements.
 
 sumFibs(1000);
 //------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+function sumPrimes(num) {
+  
+  //variables
+  var allNumbers = [1]; // element 0 = "1".
+  
+  var primeNumbers = [];
+   
+  
+  
+  for (var i = 1; i < num; i++) { // fills "allNumbers" with all integers bigger than 1 && <= "num".
+    
+      allNumbers[i] = allNumbers[i - 1] + 1;
+  }
+  
+  
+  
+  for (var z = 0; z < allNumbers.length; z++) { // the "allNumbers" element being tested for prime-ness.
+    
+      if (allNumbers[z] == 2) {
+        
+          primeNumbers.push(allNumbers[z]);
+      }
+    
+      
+    
+      if (allNumbers[z] !== 1 && allNumbers[z] % 2 !== 0 ) { // if it's not 1 && not an even number do this:
+        
+          var divisible = "no"; // keeps track if current element being tested for prime-ness has proved divisible by something.
+        
+          for (var p = 1; p < allNumbers[z]; p++) { // the "allNumbers" element I want to test the potential primer against
+
+            if(allNumbers[z] !== allNumbers[p] && allNumbers[z] > allNumbers[p]) { // if current element being tested is not equal to tester element && it's bigger than tester element, do this:
+
+                if(allNumbers[z] % allNumbers[p] === 0 ) { // if element being tested is divisible by current tester element [ a number smaller than it], then it IS divisible by a number other than one and itself AND, therefore, NOT PRIME.
+
+                  divisible = "yes";
+                }
+            }
+        }
+        
+        if (divisible == "no") { // if element being tested has proved NOT DIVISIBLE by anything other than 1 and itself...
+          
+            primeNumbers.push(allNumbers[z]); //...push to "primeNumbers".
+        }
+    }
+    
+      
+  }
+  
+  
+  
+  var totalPrime = primeNumbers.reduce(function(a, b) { //adds all numbers is "primeNumbers" and returns the sum. 
+    
+      return a + b;
+    
+  }, 0);
+  
+  
+  
+  return totalPrime; 
+
+}
+
+sumPrimes(977);
+//------------------------------------------------------------------------------------------------------------------------
