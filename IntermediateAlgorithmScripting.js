@@ -1035,3 +1035,106 @@ function sumPrimes(num) {
 
 sumPrimes(977);
 //------------------------------------------------------------------------------------------------------------------------
+
+
+
+// Find the smallest common multiple of the provided parameters that can be evenly divided by both, 
+// as well as by all sequential numbers in the range between these parameters.
+
+function smallestCommons(arr) {
+  
+  var smallLarge = [];
+  
+  var originalLCM;
+  
+  var filling = [];
+  
+  var allEvenly = "no";
+  
+  var finalLCM;
+  
+  
+  // pushes both "arr" numbers into "smallLarge" array in order from least to greatest
+  if (arr[0] < arr[1]) {
+    
+    smallLarge.push(arr[0]);
+    smallLarge.push(arr[1]);
+  }
+  
+  
+  else {
+    
+      smallLarge.push(arr[1]);
+      smallLarge.push(arr[0]);
+  }
+  
+  
+  
+  if (smallLarge[1] % smallLarge[0] === 0) { // if bigger number IS evenly divisible by smaller one...
+    
+      originalLCM = smallLarge[1]; //...then the LCM is: bigger #.
+  }
+  
+  else { // bigger number IS NOT evenly divisible by smaller one...
+    
+      var divisibleStatus = "no";
+    
+      for (var i = 2; divisibleStatus == "no"; i++) { // as long as divisibleStatus == "no": keep executing.
+        
+          var big = smallLarge[1] * i; // multiplies original big # by 2 & then by 1 more each time
+          var small = smallLarge[0]; // small number from "arr".
+          
+          if (big % small === 0) { // if new version of big # is evenly divisible by small #...
+            
+              originalLCM = big; // this version of big # is the LCM.
+            
+              divisibleStatus = "yes"; // change value of this variable to "yes" so loop stops.
+          }
+      } // end of loop
+  }// end of "else"
+  
+  
+  // At this point the LCM of the "arr" numbers is found. 
+    
+    
+  for (var n = smallLarge[0] + 1; n < smallLarge[1]; n++) { // puts all #'s b/w small # & big # into an array - small to large.
+    
+      filling.push(n);
+  }
+    
+    
+  for (var h = 1; allEvenly == "no"; h++) { // while "allEvenly" = "no", keep looping.
+    
+      finalLCM = originalLCM * h; // new version of originalLCM is made by multiplying originalLCM by "h", if last "finalLCM"
+    // wasn't divisible by all numbers in the range.
+    
+      var tracker = 0; // will be equal to "filling.length" if all numbers b/w small & big number were evenly divided into "finalLCM".
+    
+      for (var b = 0; b < filling.length; b++) { // iterates over all numbers in "filling" array.
+
+        
+          if (finalLCM % filling[b] === 0) { // if current number of "filling" array evenly divides into "finalLCM" do this:
+
+              tracker += 1; 
+          }
+        
+      }
+    
+      if (tracker == filling.length) { // if all numbers in "filling" array evenly divided into the current version of
+                                       // "finalLCM", end the loop.
+        
+          allEvenly = "yes";
+        
+      }
+    
+  }
+  
+  
+  
+  
+  return finalLCM; // returns latest version of "finalLCM" which meets all necessary requirements.
+}
+
+
+smallestCommons([1, 5]);
+//----------------------------------------------------------------------------------------------------------------------
