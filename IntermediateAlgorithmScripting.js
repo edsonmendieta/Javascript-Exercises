@@ -1157,3 +1157,63 @@ function findElement(arr, func) {
 
 findElement([1, 2, 3, 4], function(num){ return num % 2 === 0; });
 //---------------------------------------------------------------------------------------------------------------------
+
+
+
+// Drop the elements of an array (first argument), starting from the front, until the predicate (second argument)
+//returns true.
+// Return the rest of the array, otherwise return an empty array.
+
+function dropElements(arr, func) {
+  // Drop them elements.
+  
+  var original = [];
+  
+  var array = [];
+  
+  var result = "no";
+  
+  
+  for (var z = 0; z < arr.length; z++) { // pushes elements of "arr" into "original" array in regular form.
+    
+      original.push(arr[z]);
+  } //-------------------------------------------------------------------------------
+  
+  
+  for (var i = 0; i < arr.length; i++) { // pushes elements of "arr" into "array" as singular arrays.
+    
+      var singleArr = [];  
+    
+      singleArr.push(arr[i]);
+    
+      array.push(singleArr);
+  } // -------------------------------------------------------------------
+  
+  
+  
+  
+   //return array[0].filter(func).length;
+  
+  
+  for (var j = 0; result == "no" && j < array.length; j++) { // if: result == "no", and, "j" is less than the length of the array, meaning this loop won't execute on an empty array, execute.
+    
+      if (array[j].filter(func).length === 0) { // if element didn't pass "func" test...
+        
+          original.shift(); //...drop respective element from "original" array.
+        
+      }
+    
+      else {
+          
+          result = "yes"; // if current element from "array" array passes "func" test, stop loop and...
+      }
+    
+  } //-------------------------------------------------------------------------------
+
+
+  
+  return original; // return edited, or not if all elements of "arr" pass "func" test, "original" array.
+  
+}
+
+dropElements([1, 2, 3, 4], function(n) {return n > 5;});
