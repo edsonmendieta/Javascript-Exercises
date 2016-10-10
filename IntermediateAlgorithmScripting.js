@@ -1217,3 +1217,60 @@ function dropElements(arr, func) {
 }
 
 dropElements([1, 2, 3, 4], function(n) {return n > 5;});
+//------------------------------------------------------------------------------------------------------------------------
+
+
+
+// Flattens a nested array. Accounts for varying levels of nesting.
+
+
+function steamrollArray(arr) {
+  
+  //--------------------
+  var examiner = [];
+  
+  var lastArray = [];
+ //---------------------
+
+  
+
+ for (var i = 0; i < arr.length; i++) { // fills "myArray" with every element in "arr" argument that is passed into function.
+   
+      examiner.push(arr[i]);
+   }
+ //----------------------------------------------------------
+  
+  
+  
+  for (var z = 0; examiner.length !== 0; z = 0) { // as long as array is not empty, examine the first element.
+    
+      if (Array.isArray(examiner[z]) === false) { // if element is NOT an array, push it to "lastArray", because it's 
+                                                 //either a number, string, or object (going off the provided test-cases).
+        
+          lastArray.push(examiner[z]); // push to "lastArray"
+          examiner.splice(0, 1); // remove this element from "examiner"
+      }
+      
+      else if (examiner[z].length >= 1) { // if element is a non-empty array...
+        
+          for (var r = 0; r < examiner[z].length; r++) { // iterate through each element inside and...
+            
+              examiner.push(examiner[z][r]); //...push this child element to "examiner".
+          }
+          examiner.splice(0, 1); // remove this element from "examiner" (initial element examined).
+      }
+    
+      else { // if element is anything other than string, number, or non-empty array, remove it from "examiner".
+        
+          examiner.splice(0, 1);
+      }
+  }
+  
+  
+  
+  return lastArray; // return the new array with no array child elements.
+
+}
+
+steamrollArray([1, {}, [3, [[4]]]]);
+//------------------------------------------------------------------------------------------------------------------------
