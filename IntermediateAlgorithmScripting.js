@@ -1346,3 +1346,66 @@ function binaryAgent(str) {
 
 binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
 //-------------------------------------------------------------------------------------------------------------------
+
+
+
+// Checks if the predicate (second argument) is truthy on all elements of a collection (first argument).
+
+function truthCheck(collection, pre) {
+  // Is everyone being true?
+  
+  var truthStatus = true;
+
+  
+  
+  for (var i = 0; i < collection.length; i++) { // iterates over each element in "collection" arg. 
+    
+      if (collection[i].hasOwnProperty(pre) === false) { // if object does not contain the "pre" arg. property....
+        
+          truthStatus = false; // changes this variable's value to false and function return's "false", since the next "if"                                         statement only executes if the value of "truthStatus" is "true".
+      }
+  }
+  
+  
+  if (truthStatus === true) { // if all objects in "collection" had the "pre" property....
+    
+       for (var z = 0; z < collection.length; z++) { // iterates over all elements in "collection" and...
+         
+           switch (collection[z][pre]) { // if the value of the "pre" propert in this current object matches any of the cases
+                                         // then "truthStatus" equals false.
+               
+             case 0:
+               truthStatus = false;
+               break;
+             case null:
+               truthStatus = false;
+               break;
+             case "":
+               truthStatus = false;
+               break;
+             case undefined:
+               truthStatus = false;
+ 
+           } // switch  ends
+         
+            if (typeof collection[z][pre] !== "string") { // if the value of this property is not a string...
+             
+               if (isNaN(collection[z][pre]) === true) { // and it's ture that it's NOT a number, "truthStatus" equals false.
+                 
+                   truthStatus = false; // really used for a key with a value of NaN since "case NaN" wasn't matching it. 
+               }
+           }
+       } // loop  closes
+  } // if  closes
+  
+
+  
+  
+  return truthStatus; // returns true or false
+}
+
+
+truthCheck([{"single": "double"}, {"single": NaN}], "single");
+
+truthCheck([{"user": "Tinky-Winky", "sex": "male", "age": 0}, {"user": "Dipsy", "sex": "male", "age": 3}, {"user": "Laa-Laa", "sex": "female", "age": 5}, {"user": "Po", "sex": "female", "age": 4}], "age");
+//--------------------------------------------------------------------------------------------------------------------
