@@ -1274,3 +1274,75 @@ function steamrollArray(arr) {
 
 steamrollArray([1, {}, [3, [[4]]]]);
 //------------------------------------------------------------------------------------------------------------------------
+
+
+
+// Returns an English translated sentence of the passed binary string.
+
+function binaryAgent(str) {
+  
+  var splitStr = str.split(" ");
+  
+  var twoDigits = [];
+  
+  var humanRead = [];
+
+  
+  for (var i = 0; i < splitStr.length; i++) { // iterates over each element in "splitStr" array.
+    
+      var total = 0; // keepts track of the total numberical value of a byte as each of its 8 positions are iterated over.
+    
+      for (var z = 0; z < splitStr[i].length; z++) { // iterates over each of the 8 positions in the current byte.
+        
+        
+          if (splitStr[i][z] == 1) { // if current position in byte is positive (has a "1"), then...
+            
+              switch (z) { //...evaluate its position and add a certain numberical value to "total" depending on the position. 
+                  
+                case 0:
+                  total += 128;
+                  break;
+                case 1:
+                  total += 64;
+                  break;
+                case 2:
+                  total += 32;
+                  break;
+                case 3:
+                  total += 16;
+                  break;
+                case 4:
+                  total += 8;
+                  break;
+                case 5:
+                  total += 4;
+                  break;
+                case 6:
+                  total += 2;
+                  break;
+                case 7:
+                  total += 1;
+              } // end of switch ---------
+          } // end of if -----------
+      } // end of var z loop -------------------
+    
+      twoDigits.push(total);
+  } // end of outermost loop -------------
+  
+  // At this point: all two-digit ASCII codes of each byte are in the array "twoDigits" 
+  
+  
+  
+  for (var u = 0; u < twoDigits.length; u++) { // iterates over each element in "twoDigits" array.
+    
+      humanRead.push(String.fromCharCode(twoDigits[u]));
+      // pushes the symbol of respective ASCII number to "humanRead" array.
+  }
+  
+  
+  
+  return humanRead.join(""); // returns English senctence.
+}
+
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
+//-------------------------------------------------------------------------------------------------------------------
