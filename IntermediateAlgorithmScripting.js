@@ -1409,3 +1409,50 @@ truthCheck([{"single": "double"}, {"single": NaN}], "single");
 
 truthCheck([{"user": "Tinky-Winky", "sex": "male", "age": 0}, {"user": "Dipsy", "sex": "male", "age": 3}, {"user": "Laa-Laa", "sex": "female", "age": 5}, {"user": "Po", "sex": "female", "age": 4}], "age");
 //--------------------------------------------------------------------------------------------------------------------
+
+
+
+// Creates a function that sums two arguments together. If only one argument is provided, returns 
+// a function that expects one argument and returns the sum.
+
+    var addTogether = function(a, b) { // potenially accepts up to 2 arguments
+        
+  
+            
+         for (var i = 0; i < arguments.length; i++) { // checks to see if any arguments passed to this function are not numbers.
+                
+              if (typeof arguments[i] !== "number") { // if an argument passed is NOT a NUMBER...
+                    
+                  return ; //... return undefined
+              } 
+          }
+            
+          
+          if (arguments.length == 2) { // if two arguments were passed to this function...
+            
+              return a + b; //...return their sum
+          }
+
+  
+          else { // if only 1 argument was passed to this function...
+            
+              return function(y) { // return this function; which is a closure and thus remembers variables defined in parent                                        function/scopes: a.k.a: remembers value of "a" argument (and "b" if needed).
+      
+                 if (typeof y !== "number") { // if argument passed to this function is NOT a NUMBER... 
+          
+                    return ; //...returned undefined
+                 }
+      
+                 return a + y; //...else, return the SUM of the argument passed to "addTogether" and the argument passed to this                                   function ("y").
+              };
+          }
+      };
+
+
+
+addTogether(2, 3);
+addTogether(2)(3);
+addTogether("http://bit.ly/IqT6zt");
+addTogether(2, "3");
+addTogether(2)([3]);
+//-------------------------------------------------------------------------------------------------------------------
