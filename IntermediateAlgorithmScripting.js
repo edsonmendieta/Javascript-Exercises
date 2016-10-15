@@ -1456,3 +1456,137 @@ addTogether("http://bit.ly/IqT6zt");
 addTogether(2, "3");
 addTogether(2)([3]);
 //-------------------------------------------------------------------------------------------------------------------
+
+
+
+// Returns true if the passed string is a valid US phone number.
+// The user may fill out the form field any way they choose as long as it is a valid US number.
+
+function telephoneCheck(str) {
+  // Good luck!
+  
+  
+  var paraArray = [];
+  
+  var paraL = /\(/g;
+  
+  var paraR = /\)/g;
+  
+  var paraLeft = str.match(paraL);
+  
+  var paraRight = str.match(paraR);
+  
+  
+  var paraTruth = true;
+  
+  
+  //-------------------------------------------------------------
+  
+  var myRe = /\d/g; // matches ALL numbers in string
+  
+  var filteredArray = str.match(myRe); // array filled with matches of "myRe" in passed "str".
+  
+  //--------------------------------------------------------------
+  
+  
+  // FIRST: check for parantheses in the passed string (must be exactly 2, AND exclusively THREE NUMBERS inside).
+  
+  if (paraLeft !== null && paraRight !== null) { // if both rexexp matches MATCHED, push their resulting arrays to "paraArray"
+    
+      paraArray.push(paraLeft);
+  
+      paraArray.push(paraRight);
+  }
+  
+  else if (paraLeft === null && paraRight !== null) { // if only right one exists...
+    
+      return false;
+  }
+  
+  else if (paraRight === null && paraLeft !== null) { // if only left one exists...
+    
+      return false;
+  }
+  
+
+  
+  if (paraArray.length !== 0 && paraArray.length !== 2) { // if length is NOT ZERO or TWO (zero means no parathenses),
+                                                          // then there was only one parathenses and it's an Invalid #.
+    
+      paraTruth = false;
+      return false;
+  }
+  
+  else if (paraArray.length == 2) { // if there was at least one of each (left & right parantheses)...
+    
+      if (paraArray[0].length !== 1 || paraArray[1].length !== 1) { // and there is more than one of either...
+        
+          paraTruth = false; //...then phone # is INVALID.
+          return false;
+      }
+  }
+  
+  // AT THIS POINT: "paraTruth" is either false or true(either there are zero para.'s in "str" or there are exactly one of each).
+  
+  if (paraTruth === false) { // if "paraTruth" is false at this point, return false.
+    
+    return false;
+  }
+  
+  
+  
+  if (paraTruth === true && paraArray.length == 2) { // if string has parantheses, and there are 2, and exactly one of each (left                                                      // & right), then...
+      var areaCode = /\(+\d+\d+\d+\)/;
+    
+      if (str.match(areaCode) !== null && str.match(areaCode)[0].split("").length === 5) { // checks to see that there are exactly 3 NUMBERS between them
+        
+          paraTruth = true;
+      }
+    
+      else {
+        
+          paraTruth = false;
+          return false;
+      }
+    
+//       return str.match(areaCode);
+      
+  }
+  
+  // AT THIS POINT: If "paraTruth" is TRUE, it's BECAUSE there are ZERO para.'s in "str" OR they are USED CORRECTLY.
+  
+  
+  if (str.split("")[0] == "-" && str.split("")[1] == 1) { // checks for an erroneous country code of "-1".
+    
+    return false;
+  }
+  
+
+  
+  
+  //---------------------------------------------------------------
+  if (filteredArray.length == 10 && paraTruth === true) { // if it's a 10-digit #, and there are no mis-used para.'s...
+    
+      return true;
+  }
+  
+  else if (filteredArray.length == 11 && filteredArray[0] == 1 && paraTruth === true) { // same but w/country code...
+    
+      return true;
+  }
+  
+  else {
+    
+      return false;
+  }
+ //----------------------------------------------------------------- 
+
+
+}
+
+
+telephoneCheck("-1 (757) 622-7382");
+telephoneCheck("1 555)555-5555");
+telephoneCheck("10 (757) 622-7382");
+telephoneCheck("(6505552368)");
+//--------------------------------------------------------------------------------------------------------------------
