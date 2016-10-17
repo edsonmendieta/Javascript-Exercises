@@ -1590,3 +1590,69 @@ telephoneCheck("1 555)555-5555");
 telephoneCheck("10 (757) 622-7382");
 telephoneCheck("(6505552368)");
 //--------------------------------------------------------------------------------------------------------------------
+
+
+
+// solution-in-progress
+
+function sym(args) {
+  
+  // global variables ---------------------------------------------
+  var argArray = [];
+  var comparingDuo = [];
+  var standard = [];
+  // --------------------------------------------------------------
+  
+  for (var i = 0; i < arguments.length; i++) { // pushes all arrays in "args" to "argArray".
+    
+      argArray.push(arguments[i]);
+  }
+  // ----------------------------------------------------------------------------------------
+  
+  
+  for (var z = 0; z < 2; z++) { // pushes all elements in first 2 arrays into "comparing" array.
+    
+      for (var j = 0; j < argArray[z].length; j++) {
+        
+          comparingDuo.push(argArray[z][j]);
+      }
+  }
+  
+  
+  for (var y = 0; y < comparingDuo.length; y++) { // iterates over each element in "comparingDuo" array.
+    
+      var unique = "yes"; // if current element in "comparingDuo" array is NOT unique, this changes to "no".
+    
+      for (var x = 0; unique == "yes" && x < comparingDuo.length; x++) { // compares current outer loop element with all others                                                                             in "comparingDuo" array to check if it's unique.
+        
+          if (x !== y && comparingDuo[x] == comparingDuo[y]) { // if there is a match, current outer-element is NOT unique...
+            
+              unique = "no"; // ends loop and moves on to next outer-loop element
+          }
+      } // inner-loop closes
+    
+      if (unique == "yes") { // if current outer-loop element WAS UNIQUE, push it to "standard" array.
+        
+          standard.push(comparingDuo[y]);
+      }
+  } // outer-loop closes
+  
+  
+  
+  argArray.shift(); // removes first two arrays in "argArray" since they are being compared already.
+  argArray.shift();
+  
+  if (arguments.length == 2) { // if ONLY 2 arrays were passed as arguments to this function, return "standard" array, A.K.A.:                                     the symmetric of the two arrays.
+    
+      return standard;
+  }
+  
+  // ------------------------------------------------------------------------------------------
+  
+  
+  
+  
+  return ;
+}
+
+sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
