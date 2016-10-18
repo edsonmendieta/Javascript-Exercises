@@ -1593,21 +1593,61 @@ telephoneCheck("(6505552368)");
 
 
 
-// solution-in-progress
+// Create a function that takes two or more arrays and returns an array of the symmetric difference (△ or ⊕)
+// of the provided arrays.
+
 
 function sym(args) {
   
   // global variables ---------------------------------------------
+  var noDoubles = [];
   var argArray = [];
   var comparingDuo = [];
   var standard = [];
   // --------------------------------------------------------------
+
+
+// NEED TO ELIMINATE DOUBLES FROM "args" ARRAYS -----------------------------------------------------------------------
   
-  for (var i = 0; i < arguments.length; i++) { // pushes all arrays in "args" to "argArray".
+ 
+  
+  for (var e = 0; e < arguments.length; e++) {
     
-      argArray.push(arguments[i]);
+      noDoubles.push(arguments[e]);
   }
-  // ----------------------------------------------------------------------------------------
+  
+  
+  
+ 
+  
+  for (var a = 0; a < noDoubles.length; a++) { // used to iterate over ALL arrays in "noDoubles" array.
+    
+      for (var g = 0; g < noDoubles[a].length; g++) { // used to iterate over elements in current "noDoubles" element 
+    
+    
+          for (var c = 0; c < noDoubles[a].length; c++) { // same as direct-parent loop
+          
+              if (c !== g && noDoubles[a][c] == noDoubles[a][g]) { // if element is a duplicate...
+              
+                  noDoubles[a].splice(c, 1); //...remove it from this array
+              }
+          } // c-loop closed
+        
+      } // g-loop closed
+  } // a-loop closed
+  
+ // AT THIS POINT: "noDoubles" array is filled with the argument arrays W/ NO DOUBLES.
+  
+  
+  for (var l = 0; l < noDoubles.length; l++) { // fills "argArray" with edited arrays from "noDoubles" array.
+    
+      argArray.push(noDoubles[l]);
+  }
+   
+
+
+// --------------------------------------------------------------------------------------------------------------------
+  
   
   
   for (var z = 0; z < 2; z++) { // pushes all elements in first 2 arrays into "comparing" array.
@@ -1642,17 +1682,64 @@ function sym(args) {
   argArray.shift(); // removes first two arrays in "argArray" since they are being compared already.
   argArray.shift();
   
+  comparingDuo = [];
+  
   if (arguments.length == 2) { // if ONLY 2 arrays were passed as arguments to this function, return "standard" array, A.K.A.:                                     the symmetric of the two arrays.
     
       return standard;
   }
   
+  
   // ------------------------------------------------------------------------------------------
   
   
+  for (var b = 0; argArray.length !== 0; b = 0) { // as long as "argArray" is NOT EMPTY, do this:
+    
+      comparingDuo = comparingDuo.concat(standard.concat(argArray[0]));
+      // at this point: array in "standard" and first array in "argArray" are in "comparingDuo" array--------
+
+      standard = [];
+      argArray.shift();
+     // at this point: "standard" has been emptied, and array from "argArray" currently in "comparingDuo" has been removed             from "argArray".
+    
+    
+      //-----------------------------------------------------------------------------------------------
+      
+      for (var h = 0; h < comparingDuo.length; h++) { // iterates over each element in "comparingDuo" array.
+    
+      var checker = "yes"; // if current element in "comparingDuo" array is NOT unique, this changes to "no".
+    
+      for (var r = 0; checker == "yes" && r < comparingDuo.length; r++) { // compares current outer loop element with all                                                                           others in "comparingDuo" array to check if it's unique.
+        
+          if (r !== h && comparingDuo[r] == comparingDuo[h]) { // if there is a match, current outer-element is NOT unique...
+            
+              checker = "no"; // ends loop and moves on to next outer-loop element
+          }
+      } // inner-loop closes
+    
+      if (checker == "yes") { // if current outer-loop element WAS UNIQUE, push it to "standard" array.
+        
+          standard.push(comparingDuo[h]);
+      }
+  } // outer-loop closes -----------------------------------------------------------------------------
+    
+    
+    comparingDuo = []; // empty "comparingDuo" array for next pair of arrays to be compared.
+    
+    
+} // outer-most-loop closes
+  
+//----------------------------------------------------------------------------------------------------------
+
   
   
-  return ;
+  return standard;
+  
+  
 }
 
+
 sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
+sym([1, 2, 5], [2, 3, 5], [3, 4, 5]);
+sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
+//----------------------------------------------------------------------------------------------------------------------
