@@ -1743,3 +1743,106 @@ sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
 sym([1, 2, 5], [2, 3, 5], [3, 4, 5]);
 sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
 //----------------------------------------------------------------------------------------------------------------------
+
+
+
+// IN-PROGRESS
+
+
+function checkCashRegister(price, cash, cid) {
+  
+
+  // USEABLE VARIABLES --------------------------------------------------
+  
+  var currencyValues = [0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 100];
+  
+  var register = []; // copy of "cid" array.
+
+  var changeDue = cash - price; // a person's total change due.
+  
+  var yourChange = []; // array to which a person's exact change will be pushed to.
+  
+  // ---------------------------------------------------------------------
+  
+  
+  
+// Cash-IN-Drawer variable--------------------------------------------------
+  
+  var cidTotal = cid.reduce(function(a, b) {
+    
+      return a + b[1];
+  }, 0);
+  
+  //  use "cidTotal.toFixed(2)" to get accurate total w/ only two decimal places. 
+
+// -----------------------------------------------------------------------
+  
+  // Total CID
+  var totalRegister = cidTotal.toFixed(2);
+  
+  
+// -----------------------------------------------------------------------------------
+  
+  for (var i = 0; i < cid.length; i++) { // pushes all elements in "cid" array to
+                                         // "register" array.
+    
+      register.push(cid[i]);
+  }
+  
+// -------------------------------------------------------------------------------------
+  
+  
+  
+// CONDITION EXECUTIONS 
+//---------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------
+
+  
+  if (totalRegister < changeDue) { // if not enough money in register:
+    
+      return "Insufficient Funds";
+  }
+  
+  else if (totalRegister == changeDue) { // if only exact change in register & no more:
+    
+      return "Closed";
+  }
+  
+//--------------------------------------------------------------------------------
+  
+  
+  if (totalRegister > changeDue) {
+    
+      for (var z = 8; z > -1; z--) { // loops 9 times
+        
+
+           if (register[z][1] !== 0 && currencyValues[z] <= changeDue) {
+             
+               var miniArray = [];
+             
+               var quotient;
+             
+               var product; 
+               
+               
+               miniArray.push(register[z][0]);
+             
+               quotient = changeDue / currencyValues[z];
+             
+               quotient = quotient.toString().split(".")[0]; // leaves out decimals
+             
+               
+           }
+      }
+  }
+  
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+  
+}
+ 
+
+
+checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1.00], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+//---------------------------------------------------------------------------------------------------------------------
