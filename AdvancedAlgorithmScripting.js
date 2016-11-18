@@ -573,4 +573,103 @@ updateInventory([[0, "Bowling Ball"], [0, "Dirty Sock"], [0, "Hair Pin"], [0, "M
 
 
 
-//
+
+
+function permAlone(str) {
+  
+  var counter = 0;
+  
+  
+  function generate(n, array) {
+	
+	
+	
+	if (n == 1) { // at this point, new version of array is ready for output.
+		
+		// console.log(array)
+		
+		var strVersion = array.join("");
+		
+		var status = "no"; 
+		
+		for (var e = 0; e < strVersion.length && status == "no"; e++) {
+			
+			var letter = array[e];
+			
+			var regex = new RegExp(letter + "{2}", "g"); // dynamic regexp
+			
+			if (strVersion.match(regex)) {
+		
+ 				status = "yes"; // there was two identical letters side-by-side
+ 	
+			}
+			
+		}
+		
+		if (status == "no") { // if no two identical letters were side-by-side...
+			
+			counter += 1; // update the counter total of viable permutations.
+			
+// 			console.log(array);
+		
+		}
+	}
+	
+	// ------------------------------------------------------------------------
+	
+	else {
+		
+	    for (var i = 0; i < n - 1; i++) {
+			
+			
+		    generate(n - 1, array);
+			
+			if (n % 2 === 0) {
+	
+				
+				var one = array[i];
+				var two = array[n - 1];
+				
+				array[i] = two;
+				
+				array[n - 1] = one;
+				
+				
+			}
+			
+			else {
+				
+				
+				var first = array[0];
+				var second = array[n - 1];
+				
+				array[0] = second;
+				
+				array[n - 1] = first;
+				
+				
+				
+			}
+			 
+		}
+		
+		
+		
+		generate(n - 1, array);
+	}
+	
+
+}
+  
+  
+  
+  var testedArray = str.split(""); 
+  
+  generate(testedArray.length, testedArray); // runs the permutation function based    //off of provided string. 
+  
+  
+  
+  return counter; // total number of viable permuations. A.k.A: no repeats.
+}
+
+permAlone('aab');
