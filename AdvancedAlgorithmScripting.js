@@ -689,7 +689,8 @@ permAlone("aaabb");
 
 function makeFriendlyDates(arr) {
   
-  var output = [];
+  var tracker = [];
+  
   
   
   
@@ -747,33 +748,87 @@ function makeFriendlyDates(arr) {
   var year2 = Number(arr[1].substr(0, 4));
   //------------------------------------------------------------------------
   
-  
-//------------------------------------------------------------------------------  
-  
-  if (year1 == 2016 && (year2 == 2016 || (year2 == 2017 && (numMonth2 < numMonth1 || (numMonth2 == numMonth1 && numDay2 <= numDay1))))) { 
-    
-    // if date range begins in current year (2016) and ends within one year, beginning        year is NOT displayed. 
-      
-      return "whaloooo!";
-    
-  }
-  
-//------------------------------------------------------------------------------
-  
+                              //ONE
   
   if ((year2 == year1) || (year2 == year1 + 1) && (numMonth2 < numMonth1 || (numMonth2 == numMonth1 && numDay2 <= numDay1))) {
     
     // if date-range ends in less than a year from start, does NOT display ending year.
     
     
-      return 'kazoooom!';
+      tracker.push(1);
   }
   
-//-------------------------------------------------------------------------------  
+//------------------------------------------------------------------------------- 
+  
+                              //TWO
+  
+  if (year1 == 2016 && (year2 == 2016 || (year2 == 2017 && (numMonth2 < numMonth1 || (numMonth2 == numMonth1 && numDay2 <= numDay1))))) { 
+    
+    // if date range begins in current year (2016) and ends within one year, beginning        year is NOT displayed. 
+      
+      tracker.push(2);
+    
+    
+  }
+  
+//------------------------------------------------------------------------------
+         
+                             //THREE
+   
+  if (year2 == year1 && month2 == month1) {
+    
+  // If range ends in same month it begins, ending year & month NOT displayed.
+      
+      tracker.push(3);
+  }
   
   
   
-  return output;
+  
+  // Situational Constructs -------------------------------------------------
+  
+  var one1 = month1 + " " + day1 + ", " + year1;
+  
+  var one2 = month2 + " " + day2;
+  
+  // Satisfies requirements of a "1" also.
+  var two1 = month1 + " " + day1;
+  
+  var two2 = month2 + " " + day2;
+  
+  
+  var three1 = month1 + " " + day1;
+  
+  var three2 = day2;
+  
+  
+  var none1 = month1 + " " + day1 + ", " + year1;
+  
+  var none2 = month2 + " " + day2 + ", " + year2; 
+  
+  
+  
+  //-------------------------------------------------------------------------
+  
+  
+  var filler = [];
+  
+  filler.push(none1);
+  
+  filler.push(none2);
+  
+  
+  // Checking "tracker" array -----------------------------------------------
+  
+  
+  
+  
+  
+  //-------------------------------------------------------------------------
+  
+  
+  
+  return tracker;
 }
 
 //------------------------------------------------------------------------------------------------------------------------
