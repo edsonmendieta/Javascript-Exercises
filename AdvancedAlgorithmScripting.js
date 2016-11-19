@@ -683,3 +683,78 @@ permAlone("abfdefa");
 permAlone("aaabb");
 //---------------------------------------------------------------------------------------------------------------------
 
+
+
+
+
+function makeFriendlyDates(arr) {
+  
+  
+  
+  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  
+  
+  
+  // Months & Day Variables -----------------------------------------------
+  var numMonth1 = Number(arr[0].substr(5, 2));
+  
+  var numMonth2 = Number(arr[1].substr(5, 2));
+  
+  var numDay1 = Number(arr[0].substr(8, 2));
+  
+  var numDay2 = Number(arr[1].substr(8, 2));
+  //------------------------------------------------------------------------
+
+  
+  function ordinal(num) { // adds ordinal letters to end of number
+  
+      if (num == 1 || num == 21 || num == 31) {
+
+          return num + "st";
+      }
+    
+      else if (num == 2 || num == 22) {
+        
+          return num + "nd";
+      }
+    
+      else if (num == 3 || num == 23) {
+        
+          return num + "rd";
+      }
+    
+      else if (num >= 4 && num <= 20 || num >= 24 && num < 31) {
+        
+          return num + "th";
+      }
+
+  }
+  
+  
+  // New Months & Day Variables --------------------------------------------
+  var month1 = months[numMonth1 - 1];
+  
+  var month2 = months[numMonth2 - 1];
+  
+  var day1 = ordinal(numDay1);
+  
+  var day2 = ordinal(numDay2);
+  
+  var year1 = Number(arr[0].substr(0, 4));
+  
+  var year2 = Number(arr[1].substr(0, 4));
+  //------------------------------------------------------------------------
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  return year2;
+}
+
+makeFriendlyDates(['2016-07-01', '2016-07-04']);
