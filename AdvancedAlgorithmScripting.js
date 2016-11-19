@@ -689,6 +689,8 @@ permAlone("aaabb");
 
 function makeFriendlyDates(arr) {
   
+  var output = [];
+  
   
   
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -746,15 +748,35 @@ function makeFriendlyDates(arr) {
   //------------------------------------------------------------------------
   
   
+//------------------------------------------------------------------------------  
+  
+  if (year1 == 2016 && (year2 == 2016 || (year2 == 2017 && (numMonth2 < numMonth1 || (numMonth2 == numMonth1 && numDay2 <= numDay1))))) { 
+    
+    // if date range begins in current year (2016) and ends within one year, beginning        year is NOT displayed. 
+      
+      return "whaloooo!";
+    
+  }
+  
+//------------------------------------------------------------------------------
+  
+  
+  if ((year2 == year1) || (year2 == year1 + 1) && (numMonth2 < numMonth1 || (numMonth2 == numMonth1 && numDay2 <= numDay1))) {
+    
+    // if date-range ends in less than a year from start, does NOT display ending year.
+    
+    
+      return 'kazoooom!';
+  }
+  
+//-------------------------------------------------------------------------------  
   
   
   
-  
-  
-  
-  
-  
-  return year2;
+  return output;
 }
 
-makeFriendlyDates(['2016-07-01', '2016-07-04']);
+//------------------------------------------------------------------------------------------------------------------------
+
+
+
