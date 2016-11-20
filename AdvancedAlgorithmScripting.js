@@ -684,12 +684,20 @@ permAlone("aaabb");
 //---------------------------------------------------------------------------------------------------------------------
 
 
-
+//Convert a date range consisting of two dates formatted as YYYY-MM-DD into a more readable format.
+//The friendly display should use month names instead of numbers and ordinal dates instead of cardinal (1st instead of 1).
+//If the date range ends in less than a year from when it begins, do not display the ending year.
+//Additionally, if the date range begins in the current year (i.e. it is currently the year 2016) and ends within one year, 
+//the year should not be displayed at the beginning of the friendly range.
+//If the range ends in the same month that it begins, do not display the ending year or month.
 
 
 function makeFriendlyDates(arr) {
   
+  
   var tracker = [];
+  
+  var output = [];
   
   
   
@@ -750,7 +758,7 @@ function makeFriendlyDates(arr) {
   
                               //ONE
   
-  if ((year2 == year1) || (year2 == year1 + 1) && (numMonth2 < numMonth1 || (numMonth2 == numMonth1 && numDay2 <= numDay1))) {
+  if ((year2 == year1) || (year2 == year1 + 1) && (numMonth2 < numMonth1 || (numMonth2 == numMonth1 && numDay2 < numDay1))) {
     
     // if date-range ends in less than a year from start, does NOT display ending year.
     
@@ -782,6 +790,18 @@ function makeFriendlyDates(arr) {
       tracker.push(3);
   }
   
+//------------------------------------------------------------------------------
+  
+                             //FOUR
+  
+  if (year2 == year1 && (numMonth2 == numMonth1 && numDay2 == numDay1)) {
+    
+    // If start date & end date are EXACTLY the SAME: output start date
+    
+      tracker.push(4);
+  }
+  
+ 
   
   
   
@@ -821,15 +841,81 @@ function makeFriendlyDates(arr) {
   // Checking "tracker" array -----------------------------------------------
   
   
+  var reg4 = /4/g;
   
+  var reg3 = /3/g;
+  
+  var reg2 = /2/g;
+  
+  var reg1 = /1/g;
+  
+  
+  
+  var str = tracker.join("");
+  
+  
+  if (str.match(reg4)) {
+    
+      output.push(none1);
+    
+      return output;
+  }
+  
+  
+  
+  else if (str.match(reg3)) {
+    
+      output.push(three1);
+    
+      output.push(three2);
+    
+      return output;
+  }
+  
+  
+  else if (str.match(reg2)) {
+    
+      output.push(two1);
+    
+      output.push(two2);
+    
+      return output;
+  }
+  
+  else if (str.match(reg1)) {
+    
+      output.push(one1);
+    
+      output.push(one2);
+    
+      return output;
+  }
+  
+  
+  else {
+    
+      output.push(none1);
+    
+      output.push(none2);
+    
+      return output;
+  }
   
   
   //-------------------------------------------------------------------------
   
   
   
-  return tracker;
+  
+  //return tracker;
 }
+
+makeFriendlyDates(["2016-07-01", "2016-07-04"]);
+makeFriendlyDates(["2018-01-13", "2018-01-13"]);
+makeFriendlyDates(["2016-12-01", "2018-02-03"]);
+makeFriendlyDates(["2022-09-05", "2023-09-04"]);
+makeFriendlyDates(["2022-09-05", "2023-09-05"]);
+makeFriendlyDates(["2017-03-01", "2017-05-05"]);
 
 //------------------------------------------------------------------------------------------------------------------------
 
