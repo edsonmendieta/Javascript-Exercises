@@ -920,4 +920,118 @@ makeFriendlyDates(["2017-03-01", "2017-05-05"]);
 //------------------------------------------------------------------------------------------------------------------------
 
 
+//Fill in the object constructor with the following methods below:
+
+//getFirstName()
+//getLastName()
+//getFullName()
+//setFirstName(first)
+//setLastName(last)
+//setFullName(firstAndLast)
+
+//Run the tests to see the expected output for each method.
+//The methods that take an argument must accept only one argument and it has to be a string.
+//These methods must be the only available means of interacting with the object.
+
+
+var Person = function(firstAndLast) { // Object constructor
+  
+
+    var splitUp = firstAndLast.split(" "); 
+  
+  
+  //---------------------------------------------------
+  
+    this.getFirstName = function() { // outputs person's FIRST name
+      
+      
+         return splitUp[0];
+    };
+  
+  
+  
+    this.getLastName = function() { // outputs person's LAST name
+      
+      
+        return splitUp[1];
+    };
+  
+  
+  
+    this.getFullName = function() { // outputs person's FULL name
+
+        return firstAndLast;
+    };
+  
+ //-----------------------------------------------------
+  
+  
+  this.setFirstName = function(first) { // changes person's FIRST name
+    
+      var firstName = [];
+    
+      firstName.push(splitUp[0]);
+    
+      firstName.push(splitUp[1]);
+
+      firstName[0] = first;
+    
+      firstAndLast = firstName.join(" "); // re-defines it
+      
+      splitUp = firstAndLast.split(" "); // re-defines it
+    
+//       return firstAndLast;
+  };
+  
+  
+  
+  this.setLastName = function(last) { // changes person's LAST name
+    
+      var lastName = [];
+    
+      lastName.push(splitUp[0]);
+    
+      lastName.push(splitUp[1]);
+
+      lastName[1] = last;
+    
+      firstAndLast = lastName.join(" "); // re-defines it
+    
+      splitUp = firstAndLast.split(" "); // re-defines it
+  };
+  
+  
+  
+  this.setFullName = function(full) { // changes person's FULL name
+    
+      var fullName = [];
+    
+      var nameArg = full.split(" ");
+    
+    
+      fullName.push(nameArg[0]);
+    
+      fullName.push(nameArg[1]);
+    
+    
+      firstAndLast = fullName.join(" "); // re-defines it
+    
+      splitUp = firstAndLast.split(" "); // re-defines it
+  };
+  
+
+};
+
+
+
+
+
+var bob = new Person("Bob Ross"); // new copy of object constructor
+
+
+
+bob.getFullName();
+
+//---------------------------------------------------------------------------------------------------------------------
+
 
