@@ -1084,3 +1084,49 @@ orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {n
 
 //-----------------------------------------------------------------------------------------------------------------------
 
+
+//Given an array arr, find element pairs whose sum equal the second argument arg and return the sum of their indices.
+//If multiple pairs are possible that have the same numeric elements but different indices, return the smallest sum of
+//indices. Once an element has been used, it cannot be reused to pair with another.
+
+
+function pairwise(arr, arg) {
+  
+  
+  var checker = arr.reduce(function (a, b, c) {
+    
+        
+      if (b in a) {
+        
+          return a;
+      }
+    
+      else {
+        
+          for (var i = 0; i < arr.length; i++) { // iterates over "arr" array.
+            
+              if (i !== c) { // if current element is NOT the same as current reduce element...
+                
+                  if (b + arr[i] == arg) { //...and sum of element values is == "arg":
+                    
+                      a[c] = "used"; // adds index of current reduce element to object
+                      
+                      a[i] = "used"; // adds index of current loop element to object
+                  }
+              }
+          }
+      }
+    
+      return a;
+    
+  }, {});
+   
+  
+  
+  return checker;
+}
+
+pairwise([1,4,2,3,0,5], 7);
+
+//-----------------------------------------------------------------------------------------------------------------------
+
