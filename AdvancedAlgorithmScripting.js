@@ -1044,29 +1044,43 @@ bob.getFullName();
 
 
 function orbitalPeriod(arr) {
+  
+  
   var GM = 398600.4418;
   var earthRadius = 6367.4447;
   
   
-  var period = Math.round((2 * Math.PI) * Math.sqrt(Math.pow((earthRadius + arr[0].avgAlt), 3) / GM));
-  
-  var newOut = [];
-  
-  newOut.push(arr[0]);
-  
-  delete newOut[0].avgAlt;
-  
-  newOut[0].orbitalPeriod = period;
+  var finalResult = [];
   
   
-  return newOut;
+  for (var i = 0; i < arr.length; i++) {
+  
+      var period = Math.round((2 * Math.PI) * Math.sqrt(Math.pow((earthRadius + arr[i].avgAlt), 3) / GM));
+
+      var newOut = [];
+
+      newOut.push(arr[i]);
+
+      delete newOut[0].avgAlt;
+
+      newOut[0].orbitalPeriod = period;
+    
+      
+      finalResult.push(newOut[0]);
+    
+  
+  }
+ 
+  
+  return finalResult;
+ 
 }
-  
-  
   
 
 
 orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+
+orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
