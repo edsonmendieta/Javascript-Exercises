@@ -1094,9 +1094,10 @@ function pairwise(arr, arg) {
   
   
   var checker = arr.reduce(function (a, b, c) {
+   
     
         
-      if (b in a) {
+      if (a[0].join('').match(b)) {
         
           return a;
       }
@@ -1109,9 +1110,39 @@ function pairwise(arr, arg) {
                 
                   if (b + arr[i] == arg) { //...and sum of element values is == "arg":
                     
-                      a[c] = "used"; // adds index of current reduce element to object
+                      var small = [];
+                    
+                      var smaller = [];
+                    
+                      var smallest = [];
+                    
+                      a[0].push(c); // adds index of current reduce element to object
                       
-                      a[i] = "used"; // adds index of current loop element to object
+                      a[0].push(i); // adds index of current loop element to object
+                    
+                     // 1st order of values ----------------------------------
+                      smaller.push(arr[c]);
+                    
+                      smaller.push(arr[i]);
+                    
+                    // 2nd order of values--------------------------------------------
+                        
+                      smallest.push(arr[i]);
+                    
+                      smallest.push(arr[c]);
+                    
+                    //---------------------------------------------------------------- 
+                      
+                      small.push(smaller);
+                    
+                      small.push(smallest);
+                    
+                    // Sum of index pair whose value sume = arg
+                      small.push(c + i);
+                    
+                    //-----------------------------------------
+                      
+                      a.push(small); // all pushed into accumulator array
                   }
               }
           }
@@ -1119,14 +1150,33 @@ function pairwise(arr, arg) {
     
       return a;
     
-  }, {});
-   
+  }, [[]]);
+  
+  
+  
+  
+  
+  
   
   
   return checker;
+  
+
+// tests----------------------------------------------------------------------
+  
+  
+  
+  
+  
+//----------------------------------------------------------------------------
+    
+  
+  
 }
 
 pairwise([1,4,2,3,0,5], 7);
+
+// pairwise([0, 0, 0, 0, 1, 1], 1);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
