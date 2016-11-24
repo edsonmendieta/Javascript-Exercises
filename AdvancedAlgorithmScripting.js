@@ -1092,91 +1092,108 @@ orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {n
 
 function pairwise(arr, arg) {
   
+  var output = [[]];
   
-  var checker = arr.reduce(function (a, b, c) {
-   
+  var total = 0;
     
+      var rd = arr.reduce(function(a, b, c) {
         
-      if (a[0].join('').match(b)) {
+           if (output[0].join('').match(c) === null) {
+               
+               var stat = "no";
         
-          return a;
-      }
-    
-      else {
-        
-          for (var i = 0; i < arr.length; i++) { // iterates over "arr" array.
-            
-              if (i !== c) { // if current element is NOT the same as current reduce element...
-                
-                  if (b + arr[i] == arg) { //...and sum of element values is == "arg":
-                    
-                      var small = [];
-                    
-                      var smaller = [];
-                    
-                      var smallest = [];
-                    
-                      a[0].push(c); // adds index of current reduce element to object
-                      
-                      a[0].push(i); // adds index of current loop element to object
-                    
-                     // 1st order of values ----------------------------------
-                      smaller.push(arr[c]);
-                    
-                      smaller.push(arr[i]);
-                    
-                    // 2nd order of values--------------------------------------------
-                        
-                      smallest.push(arr[i]);
-                    
-                      smallest.push(arr[c]);
-                    
-                    //---------------------------------------------------------------- 
-                      
-                      small.push(smaller);
-                    
-                      small.push(smallest);
-                    
-                    // Sum of index pair whose value sume = arg
-                      small.push(c + i);
-                    
-                    //-----------------------------------------
-                      
-                      a.push(small); // all pushed into accumulator array
-                  }
-              }
-          }
-      }
-    
-      return a;
-    
-  }, [[]]);
-  
-  
-  
-  
-  
-  
-  
-  
-  return checker;
-  
+               for (var i = 0; i < arr.length && stat == "no"; i++) {
 
-// tests----------------------------------------------------------------------
+                   if ((output[0].join('').match(i) === null && i !== c) && b + arr[i] == arg) {
+                     
+                         stat = "yes";
+                     
+                         output[0].push(c);
+                     
+                         output[0].push(i);
+                     
+                     //----------------------------------------------
+                         var mini = [];
+                       
+                         var tiny1 = [];
+                     
+                         var tiny2 = [];
+                     //------------------------------------------------
+                     
+                         tiny1.push(b);
+                         tiny1.push(arr[i]);
+                     
+                         mini.push(tiny1);
+                     
+                       //--------------------
+                     
+                         tiny2.push(arr[i]);
+                         tiny2.push(b);
+                     
+                         mini.push(tiny2);
+                     //-------------------------------------------------
+                     
+                         mini.push(c + i);
+                     
+                     // **** 1st SECTION ENDS ******* -----------------------------
+                     
+                         if (output.length == 1) {
+                           
+                             output.push(mini);
+                         }// this "if" closed
+                     
+                         else if (output.length > 1) {
+                           
+                             var doneYet = "no";
+                           
+                             var match = "no";
+                           
+                             for (var k = 1; k < output.length && doneYet == "no"; k++) {
+                               
+                                 if (mini[0].join('') == output[k][0].join('') || mini[0].join('') == output[k][1].join('')) {
+                                   
+                                     doneYet = "yes";
+                                   
+                                    
+                                   
+                                     if (mini[2] < output[k][2]) {
+                                       
+                                         output[k] = mini;
+                                       
+                                         match = "yes";
+                                      
+                                     } //end "<" "if"
+                                 } // end matcher "if"
+                             }// end 2nd for-loop
+                             if (match == "no") {
+                               
+                                 output.push(mini);
+                             }
+                         }// end 1st "else-if"
+                     
+                     // ***** 2nd SECTION ENDS ****------------------------------------
+                           
+                   } // 2nd "if" closed
+               } // 1st for-loop closed
+           } // 1st "if" closed
+      }, 0); // reduce function closed
   
   
-  
-  
-  
-//----------------------------------------------------------------------------
+  for (var g = 1; g < output.length; g++) {
     
+      total += output[g][2];
+  }
   
-  
+  return total;
 }
 
 pairwise([1,4,2,3,0,5], 7);
 
-// pairwise([0, 0, 0, 0, 1, 1], 1);
+pairwise([1, 3, 2, 4], 4);
+
+pairwise([0, 0, 0, 0, 1, 1], 1);
+
+pairwise([], 100);
 
 //-----------------------------------------------------------------------------------------------------------------------
 
